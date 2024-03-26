@@ -14,22 +14,31 @@ describe("Utils test suite", () => {
     expect(actual).toBe(expected);
   });
 
+  describe('getStingInfo for arg My-String should', () => {
+    it('return right length', () => {
+        const actual = getStingInfo('My-String');
+        expect(actual.characters).toHaveLength(9);
+    });
+
+    it('return right lower case')
+  });
+
   it.only('should return info for valid string', () => {
-    const acutal = getStingInfo('My-String');
+    const actual = getStingInfo('My-String');
 
-    expect(acutal.lowerCase).toBe('my-string');
-    expect(acutal.extraInfo).toEqual({});
+    expect(actual.lowerCase).toBe('my-string');
+    expect(actual.extraInfo).toEqual({});
 
-    expect(acutal.characters).toHaveLength(9);
-    expect(acutal.characters).toEqual(['M', 'y', '-','S', 't', 'r','i', 'n', 'g']);
-    expect(acutal.characters).toContain<string>('M');
-    expect(acutal.characters).toEqual(
+    expect(actual.characters).toHaveLength(9);
+    expect(actual.characters).toEqual(['M', 'y', '-','S', 't', 'r','i', 'n', 'g']);
+    expect(actual.characters).toContain<string>('M');
+    expect(actual.characters).toEqual(
         expect.arrayContaining(['S', 't', 'r','i', 'n', 'g','M', 'y', '-'])
     );
 
-    expect(acutal.extraInfo).not.toBe(undefined);
-    expect(acutal.extraInfo).not.toBeUndefined();
-    expect(acutal.extraInfo).toBeDefined();
-    expect(acutal.extraInfo).toBeTruthy();
+    expect(actual.extraInfo).not.toBe(undefined);
+    expect(actual.extraInfo).not.toBeUndefined();
+    expect(actual.extraInfo).toBeDefined();
+    expect(actual.extraInfo).toBeTruthy();
   });
 });
