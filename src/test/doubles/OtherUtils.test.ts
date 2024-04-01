@@ -1,6 +1,6 @@
 import { OtherStringUtils, calculateComplexity, toUpperCaseWithCb } from "../../app/doubles/OtherUtils";
 
-describe.skip('Other Test Suit',() => {
+describe('Other Test Suit',() => {
 
     describe('OtherStringUtils test with spies', () => {
         let sut: OtherStringUtils;
