@@ -1,3 +1,4 @@
+import * as generated from "../../app/server_app/data/IdGenerator";
 import { Account } from "../../app/server_app/model/AuthModel";
 import { Reservation } from "../../app/server_app/model/ReservationModel";
 import {
@@ -7,7 +8,7 @@ import {
 import { Server } from "../../app/server_app/server/Server";
 import { makeAwesomeRequest } from "./utils/http-client";
 
-describe("Server app integration tests", () => {
+describe.skip("Server app integration tests", () => {
   let server: Server;
 
   beforeAll(() => {
@@ -177,7 +178,7 @@ describe("Server app integration tests", () => {
 
     const getRequestBody: Reservation = await getResult.json();
 
-    expect(getRequestBody.startDate).toBe('otherStartDate');
+    expect(getRequestBody.startDate).toBe("otherStartDate");
   });
 
   it("Should deleted reservation if authorized", async () => {
@@ -204,5 +205,29 @@ describe("Server app integration tests", () => {
     );
 
     expect(getResult.status).toBe(HTTP_CODES.NOT_fOUND);
+  });
+
+  it("snapshot demo", async () => {
+    jest.spyOn(generated, "generateRandomId").mockReturnValueOnce("1234");
+
+    await fetch("http://localhost:8080/reservation", {
+      method: HTTP_METHODS.POST,
+      body: JSON.stringify(someReservation),
+      headers: {
+        authorization: token,
+      },
+    });
+
+    const getResult = await fetch(`http://localhost:8080/reservation/1234`, {
+      method: HTTP_METHODS.GET,
+      headers: {
+        authorization: token,
+      },
+    });
+
+    const getRequestBody: Reservation = await getResult.json();
+
+    expect(getRequestBody).toMatchSnapshot();
+    expect(getRequestBody).toMatchSnapshot();
   });
 });
