@@ -37,7 +37,7 @@ describe("Database test suite", () => {
 
   it("should get element after insert", async () => {
     const id = await sut.insert(someObjectOne);
-    const actual = await sut.getBy('id', id);
+    const actual = await sut.getBy("id", id);
 
     expect(actual).toBe(someObjectOne);
   });
@@ -47,30 +47,40 @@ describe("Database test suite", () => {
     await sut.insert(someObjectTwo);
 
     const expected = [someObjectOne, someObjectTwo];
-    
-    const actual = await sut.findAllBy('color', 'blue');
+
+    const actual = await sut.findAllBy("color", "blue");
 
     expect(actual).toEqual(expected);
   });
 
-  it('should change color on object', async () => {
+  it("should change color on object", async () => {
     const id = await sut.insert(someObjectOne);
-    const expectedColor = 'red';
+    const expectedColor = "red";
 
-    await sut.update(id, 'color', expectedColor);
-    const object = await sut.getBy('id', id);
+    await sut.update(id, "color", expectedColor);
+    const object = await sut.getBy("id", id);
 
     const actualColor = object.color;
 
     expect(actualColor).toBe(expectedColor);
   });
 
-  it('should delete object', async () => {
+  it("should delete object", async () => {
     const id = await sut.insert(someObjectOne);
     await sut.delete(id);
 
-    const acutal = await sut.getBy('id', id);
+    const acutal = await sut.getBy("id", id);
 
     expect(acutal).toBeUndefined();
+  });
+
+  it("should get all elements", async () => {
+    await sut.insert(someObjectOne);
+    await sut.insert(someObjectTwo);
+    const expected = [someObjectOne, someObjectTwo];
+
+    const actual = await sut.getAllElements();
+
+    expect(actual).toEqual(expected);
   });
 });
