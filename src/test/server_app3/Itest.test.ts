@@ -163,8 +163,6 @@ describe("Server app integration tests", () => {
       }
     );
 
-    const resultBody = await updatedResult.json();
-
     expect(updatedResult.status).toBe(HTTP_CODES.OK);
 
     const getResult = await fetch(
