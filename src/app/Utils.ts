@@ -19,6 +19,7 @@ export type stringInfo = {
   extraInfo: Object | undefined;
 };
 
+
 export function getStingInfo(arg: String): stringInfo {
   return {
     lowerCase: arg.toLowerCase(),
